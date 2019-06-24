@@ -1,0 +1,23 @@
+{
+  "name": "pacman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pacmap.js",
+  "dependencies": {
+    "table": "^5.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csikirichare/Pacman.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csikirichare/Pacman/issues"
+  },
+  "homepage": "https://github.com/csikirichare/Pacman#readme"
+}
