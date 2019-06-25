@@ -8,7 +8,7 @@
 let pacman = {
   x: 2,
   y: 2,
-  direct: 'w'
+  direct: 'd'
 };
 
 let player = {
