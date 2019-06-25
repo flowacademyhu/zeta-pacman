@@ -5,28 +5,21 @@
 // x: sorok
 // y: oszlopok
 
-let arr = [[5, 5, 5, 5, 5], [5, 3, 3, 3, 5], [5, 3, 1, 3, 5], [5, 3, 3, 3, 5], [5, 3, 3, 3, 5], [5, 3, 3, 3, 5], [5, 5, 5, 5, 5]];
-
 let pacman = {
   x: 2,
-  y: 2
+  y: 2,
+  direct: 'w'
 };
 
-let ghost = {
-  x: 3,
-  y: 3
+let player = {
+  score: 0
 };
 
-let ghostDirect = ['up', 'down', 'left', 'right'];
-
-let direct = 'w'; // beolvasott irány
-let score = 0;
-
-const move = (direct, arr, score, pacman) => {
-  switch (direct) {
+const move = (arr, player, pacman) => {
+  switch (pacman.direct) {
     case 'w':
       if (arr[pacman.x - 1][pacman.y] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-        score = score + 10;
+        player.score = player.score + 10;
       }
       if (arr[pacman.x - 1][pacman.y] === 5) {
 
@@ -38,7 +31,7 @@ const move = (direct, arr, score, pacman) => {
       break;
     case 's':
       if (arr[pacman.x + 1][pacman.y] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-        score = score + 10;
+        player.score = player.score + 10;
       }
       if (arr[pacman.x + 1][pacman.y] === 5) {
 
@@ -50,7 +43,7 @@ const move = (direct, arr, score, pacman) => {
       break;
     case 'a':
       if (arr[pacman.x][pacman.y - 1] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-        score = score + 10;
+        player.score = player.score + 10;
       }
       if (arr[pacman.x][pacman.y - 1] === 5) {
 
@@ -63,7 +56,7 @@ const move = (direct, arr, score, pacman) => {
     case 'd':
 
       if (arr[pacman.x][pacman.y + 1] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-        score = score + 10;
+        player.score = player.score + 10;
       }
       if (arr[pacman.x][pacman.y + 1] === 5) {
 
@@ -74,8 +67,10 @@ const move = (direct, arr, score, pacman) => {
       }
       break;
   }
-  return score;
 };
 
-score = move(direct, arr, score, pacman);
-move(direct, arr, score, pacman);
+module.exports = {
+  pacman,
+  player,
+  move
+};
