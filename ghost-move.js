@@ -2,14 +2,35 @@
 // x: sorok
 // y: oszlopok
 
-let ghost = {
-  x: 3,
-  y: 3,
+let ghost01 = {
+  x: 7,
+  y: 8,
   prev: 0,
   direct: 'up'
 };
 
-const searchDirect = () => {
+let ghost02 = {
+  x: 9,
+  y: 8,
+  prev: 0,
+  direct: 'up'
+};
+
+let ghost03 = {
+  x: 7,
+  y: 10,
+  prev: 0,
+  direct: 'up'
+};
+
+let ghost04 = {
+  x: 9,
+  y: 10,
+  prev: 0,
+  direct: 'up'
+};
+
+const searchDirect = (arr, ghost) => {
   let ghostDirect = ['up', 'down', 'left', 'right'];
   let moveDirect = [];
   let moveToPlace = [arr[ghost.x - 1][ghost.y], arr[ghost.x + 1][ghost.y], arr[ghost.x][ghost.y - 1], arr[ghost.x][ghost.y + 1]];
@@ -21,7 +42,6 @@ const searchDirect = () => {
   let randomDir = moveDirect[Math.floor(Math.random() * moveDirect.length)];
   return randomDir;
 };
-// ghost.direct = searchDirect();
 
 const ghostMove = (arr, ghost) => {
   switch (ghost.direct) {
@@ -53,7 +73,10 @@ const ghostMove = (arr, ghost) => {
 };
 
 module.exports = {
-  ghost,
+  ghost01,
+  ghost02,
+  ghost03,
+  ghost04,
   searchDirect,
   ghostMove
 };

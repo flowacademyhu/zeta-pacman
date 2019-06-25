@@ -37,6 +37,4 @@ const print2d = (arr) => {
   }
 };
 
-print2d(arr);
-
 module.exports = { arr, print2d };
