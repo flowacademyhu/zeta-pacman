@@ -39,36 +39,98 @@ const searchDirect = (arr, ghost) => {
       moveDirect.push(ghostDirect[i]);
     }
   }
+  switch (ghost.direct) {
+    case 'up':
+      for (let i = 0; i < moveDirect.length; i++) {
+        if (moveDirect[i] === 'down') {
+          moveDirect.splice(i, 1);
+        }
+      }
+      break;
+    case 'down':
+      for (let i = 0; i < moveDirect.length; i++) {
+        if (moveDirect[i] === 'up') {
+          moveDirect.splice(i, 1);
+        }
+      }
+      break;
+    case 'right':
+      for (let i = 0; i < moveDirect.length; i++) {
+        if (moveDirect[i] === 'left') {
+          moveDirect.splice(i, 1);
+        }
+      }
+      break;
+    case 'left':
+      for (let i = 0; i < moveDirect.length; i++) {
+        if (moveDirect[i] === 'right') {
+          moveDirect.splice(i, 1);
+        }
+      }
+      break;
+  }
   let randomDir = moveDirect[Math.floor(Math.random() * moveDirect.length)];
   return randomDir;
 };
 
-const ghostMove = (arr, ghost) => {
+const ghostMove = (arr, ghost, player) => {
   switch (ghost.direct) {
     case 'up':
-      arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      ghost.prev = arr[ghost.x - 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-      arr[ghost.x - 1][ghost.y] = 8; // ahova megy, ott szellem lesz
-      ghost.x = ghost.x - 1; // szellem koordinátái
-      break;
+      if (ghost.prev === 8) { // Ha szellem szellemmel találkozik, akkor ne rakjon vissza lenyomat szellemet
+
+      } else {
+        arr[ghost.x][ghost.y] = ghost.prev;// ahonnan elmegy oda visszakerül az ami eredetileg ott volt
+      }
+      if (arr[ghost.x - 1][ghost.y] === 1) { // Ha ott ahova lépne pacman van, csökkenjen eggyel az élet és mindenki menjen vissza eredeti helyére
+        return false;
+      } else {
+        ghost.prev = arr[ghost.x - 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
+        arr[ghost.x - 1][ghost.y] = 8; // ahova megy, ott szellem lesz
+        ghost.x = ghost.x - 1;// szellem koordinátái
+        return true;
+      }
     case 'down':
-      arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      ghost.prev = arr[ghost.x + 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-      arr[ghost.x + 1][ghost.y] = 8; // ahova megy, ott szellem lesz
-      ghost.x = ghost.x + 1; // szellem koordinátái
-      break;
+      if (ghost.prev === 8 || ghost.prev === 1) {
+
+      } else {
+        arr[ghost.x][ghost.y] = ghost.prev;// ahonnan elmegy oda visszakerül az ami eredetileg ott volt
+      }
+      if (arr[ghost.x + 1][ghost.y] === 1) {
+        return false;
+      } else {
+        ghost.prev = arr[ghost.x + 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
+        arr[ghost.x + 1][ghost.y] = 8; // ahova megy, ott szellem lesz
+        ghost.x = ghost.x + 1;// szellem koordinátái
+        return true;
+      }
     case 'left':
-      arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      ghost.prev = arr[ghost.x][ghost.y - 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-      arr[ghost.x][ghost.y - 1] = 8; // ahova megy, ott szellem lesz
-      ghost.y = ghost.y - 1; // szellem koordinátái
-      break;
+      if (ghost.prev === 8 || ghost.prev === 1) {
+
+      } else {
+        arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
+      }
+      if (arr[ghost.x][ghost.y - 1] === 1) {
+        return false;
+      } else {
+        ghost.prev = arr[ghost.x][ghost.y - 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
+        arr[ghost.x][ghost.y - 1] = 8; // ahova megy, ott szellem lesz
+        ghost.y = ghost.y - 1;// szellem koordinátái
+        return true;
+      }
     case 'right':
-      arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      ghost.prev = arr[ghost.x][ghost.y + 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-      arr[ghost.x][ghost.y + 1] = 8; // ahova megy, ott szellem lesz
-      ghost.y = ghost.y + 1; // szellem koordinátái
-      break;
+      if (ghost.prev === 8 || ghost.prev === 1) {
+
+      } else {
+        arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
+      }
+      if (arr[ghost.x][ghost.y + 1] === 1) {
+        return false;
+      } else {
+        ghost.prev = arr[ghost.x][ghost.y + 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
+        arr[ghost.x][ghost.y + 1] = 8; // ahova megy, ott szellem lesz
+        ghost.y = ghost.y + 1;// szellem koordinátái
+        return true;
+      }
   }
 };
 
