@@ -6,82 +6,160 @@ let ghost01 = {
   x: 7,
   y: 8,
   prev: 0,
-  direct: 'up'
+  direct: 0,
+  start: ['right', 'up']
 };
 
 let ghost02 = {
   x: 9,
   y: 8,
   prev: 0,
-  direct: 'up'
+  direct: 0,
+  start: ['', '', '', '', '', '', 'right', 'up', 'up', 'up']
 };
 
 let ghost03 = {
   x: 7,
   y: 10,
   prev: 0,
-  direct: 'up'
+  direct: 0,
+  start: ['', '', '', '', 'left', 'up']
 };
 
 let ghost04 = {
   x: 9,
   y: 10,
   prev: 0,
-  direct: 'up'
+  direct: 0,
+  start: ['', '', '', '', '', '', '', '', '', '', 'left', 'up', 'up', 'up']
 };
 
-const searchDirect = (arr, ghost) => {
-  let ghostDirect = ['up', 'down', 'left', 'right'];
+const searchDirect = (arr, ghost, pacman) => {
+  let ghostDirect = ['up', 'down', 'left', 'right']; // lehetséges irányok
   let moveDirect = [];
-  let moveToPlace = [arr[ghost.x - 1][ghost.y], arr[ghost.x + 1][ghost.y], arr[ghost.x][ghost.y - 1], arr[ghost.x][ghost.y + 1]];
+  let moveToPlace = [arr[ghost.x - 1][ghost.y], arr[ghost.x + 1][ghost.y], arr[ghost.x][ghost.y - 1], arr[ghost.x][ghost.y + 1]]; // megvizsgáljuk, hogy milyen mezőkre léphet
   for (let i = 0; i < moveToPlace.length; i++) {
     if (moveToPlace[i] !== 5) {
-      moveDirect.push(ghostDirect[i]);
+      moveDirect.push(ghostDirect[i]); // azoknak a mezőknek, amik nem falak, belegyűjtjük az irányát egy tömbbe
     }
   }
-  switch (ghost.direct) {
-    case 'up':
-      for (let i = 0; i < moveDirect.length; i++) {
-        if (moveDirect[i] === 'down') {
-          moveDirect.splice(i, 1);
-        }
+  let randomDir;
+  let countLeft = 0;
+  let count2Left = 0;
+  if (pacman.x === ghost.x && pacman.y < ghost.y) {
+    for (let i = 0; i < moveDirect.length; i++) {
+      if (moveDirect[i] === 'left') {
+        countLeft++;
       }
-      break;
-    case 'down':
-      for (let i = 0; i < moveDirect.length; i++) {
-        if (moveDirect[i] === 'up') {
-          moveDirect.splice(i, 1);
-        }
+    }
+    for (let i = pacman.y + 1; i < ghost.y; i++) {
+      if (arr[pacman.x][i] !== 5) {
+        count2Left++;
       }
-      break;
-    case 'right':
-      for (let i = 0; i < moveDirect.length; i++) {
-        if (moveDirect[i] === 'left') {
-          moveDirect.splice(i, 1);
-        }
-      }
-      break;
-    case 'left':
-      for (let i = 0; i < moveDirect.length; i++) {
-        if (moveDirect[i] === 'right') {
-          moveDirect.splice(i, 1);
-        }
-      }
-      break;
+    }
   }
-  let randomDir = moveDirect[Math.floor(Math.random() * moveDirect.length)];
+  let countRight = 0;
+  let count2Right = 0;
+  if (pacman.x === ghost.x && pacman.y > ghost.y) {
+    for (let i = 0; i < moveDirect.length; i++) {
+      if (moveDirect[i] === 'right') {
+        countRight++;
+      }
+    }
+    for (let i = ghost.y + 1; i < pacman.y; i++) {
+      if (arr[pacman.x][i] !== 5) {
+        count2Right++;
+      }
+    }
+  }
+  let countDown = 0;
+  let count2Down = 0;
+  if (pacman.y === ghost.y && pacman.x > ghost.x) {
+    for (let i = 0; i < moveDirect.length; i++) {
+      if (moveDirect[i] === 'down') {
+        countDown++;
+      }
+    }
+    for (let i = ghost.x + 1; i < pacman.x; i++) {
+      if (arr[i][pacman.y] !== 5) {
+        count2Down++;
+      }
+    }
+  }
+  let countUp = 0;
+  let count2Up = 0;
+  if (pacman.y === ghost.y && pacman.x < ghost.x) {
+    for (let i = 0; i < moveDirect.length; i++) {
+      if (moveDirect[i] === 'up') {
+        countUp++;
+      }
+    }
+    for (let i = pacman.x + 1; i < ghost.x; i++) {
+      if (arr[i][pacman.y] !== 5) {
+        count2Up++;
+      }
+    }
+  }
+
+  if (pacman.y === ghost.y && pacman.x < ghost.x && countUp === 1 && count2Up === ghost.x - pacman.x - 1) {
+    randomDir = 'up';
+  } else {
+    if (pacman.y === ghost.y && pacman.x > ghost.x && countDown === 1 && count2Down === pacman.x - ghost.x - 1) {
+      randomDir = 'down';
+    } else {
+      if (pacman.x === ghost.x && pacman.y > ghost.y && countRight === 1 && count2Right === pacman.y - ghost.y - 1) {
+        randomDir = 'right';
+      } else {
+        if (pacman.x === ghost.x && pacman.y < ghost.y && countLeft === 1 && count2Left === ghost.y - pacman.y - 1) {
+          randomDir = 'left';
+        } else {
+          switch (ghost.direct) { // Kivesszük ebből a tömbből azt az irányt, ami az előző iránnyal ellentétes (előre haladjon, ne lépjen vissza)
+            case 'up':
+              for (let i = 0; i < moveDirect.length; i++) {
+                if (moveDirect[i] === 'down') {
+                  moveDirect.splice(i, 1);
+                }
+              }
+              break;
+            case 'down':
+              for (let i = 0; i < moveDirect.length; i++) {
+                if (moveDirect[i] === 'up') {
+                  moveDirect.splice(i, 1);
+                }
+              }
+              break;
+            case 'right':
+              for (let i = 0; i < moveDirect.length; i++) {
+                if (moveDirect[i] === 'left') {
+                  moveDirect.splice(i, 1);
+                }
+              }
+              break;
+            case 'left':
+              for (let i = 0; i < moveDirect.length; i++) {
+                if (moveDirect[i] === 'right') {
+                  moveDirect.splice(i, 1);
+                }
+              }
+              break;
+          }
+          randomDir = moveDirect[Math.floor(Math.random() * moveDirect.length)]; // a megmaradt irányokból random sorsolunk egyet
+        }
+      }
+    }
+  }
   return randomDir;
 };
 
 const ghostMove = (arr, ghost, player) => {
   switch (ghost.direct) {
     case 'up':
-      if (ghost.prev === 8) { // Ha szellem szellemmel találkozik, akkor ne rakjon vissza lenyomat szellemet
+      if (ghost.prev === 8) { // Ha szellem szellemmel találkozik, akkor ne tárolja őt el a prev-be, ne rakjon vissza lenyomat szellemet
 
       } else {
         arr[ghost.x][ghost.y] = ghost.prev;// ahonnan elmegy oda visszakerül az ami eredetileg ott volt
       }
-      if (arr[ghost.x - 1][ghost.y] === 1) { // Ha ott ahova lépne pacman van, csökkenjen eggyel az élet és mindenki menjen vissza eredeti helyére
+      if (arr[ghost.x - 1][ghost.y] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
         return false;
       } else {
         ghost.prev = arr[ghost.x - 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
@@ -95,7 +173,7 @@ const ghostMove = (arr, ghost, player) => {
       } else {
         arr[ghost.x][ghost.y] = ghost.prev;// ahonnan elmegy oda visszakerül az ami eredetileg ott volt
       }
-      if (arr[ghost.x + 1][ghost.y] === 1) {
+      if (arr[ghost.x + 1][ghost.y] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
         return false;
       } else {
         ghost.prev = arr[ghost.x + 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
@@ -109,7 +187,7 @@ const ghostMove = (arr, ghost, player) => {
       } else {
         arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
       }
-      if (arr[ghost.x][ghost.y - 1] === 1) {
+      if (arr[ghost.x][ghost.y - 1] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
         return false;
       } else {
         ghost.prev = arr[ghost.x][ghost.y - 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
@@ -123,7 +201,7 @@ const ghostMove = (arr, ghost, player) => {
       } else {
         arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
       }
-      if (arr[ghost.x][ghost.y + 1] === 1) {
+      if (arr[ghost.x][ghost.y + 1] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
         return false;
       } else {
         ghost.prev = arr[ghost.x][ghost.y + 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
