@@ -56,7 +56,5 @@ const print2d = (arr) => {
   }
 };
 
-print2d(arr);
-
 module.exports = { arr, print2d };
 // x:9, y:13

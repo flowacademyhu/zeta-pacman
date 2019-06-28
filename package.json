@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "pacmap.js",
-  "dependencies": {
+  "dependencies": 
     "axel": "0.0.3",
+    "keypress": "^0.2.1",
     "table": "^5.4.1"
   },
   "devDependencies": {},
