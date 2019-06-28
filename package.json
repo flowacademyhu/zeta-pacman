@@ -4,6 +4,7 @@
   "description": "",
   "main": "pacmap.js",
   "dependencies": {
+    "axel": "0.0.3",
     "table": "^5.4.1"
   },
   "devDependencies": {},
