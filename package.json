@@ -2,11 +2,10 @@
   "name": "pacman",
   "version": "1.0.0",
   "description": "",
-  "main": "pacmap.js",
-  "dependencies": 
+  "main": "main.js",
+  "dependencies": {
     "axel": "0.0.3",
-    "keypress": "^0.2.1",
-    "table": "^5.4.1"
+  "keypress": "^0.2.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -14,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/csikirichare/Pacman.git"
+    "url": "git+https://github.com/flowacademyhu/zeta-pacman.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/csikirichare/Pacman/issues"
+    "url": "https://github.com/flowacademyhu/zeta-pacman/issues"
   },
-  "homepage": "https://github.com/csikirichare/Pacman#readme"
+  "homepage": "https://github.com/flowacademyhu/zeta-pacman#readme"
 }

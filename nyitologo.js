@@ -20,5 +20,7 @@ const printlogo = (arr) => {
     }
   }
 };
-(printlogo(logotomb));
+
+printlogo(logotomb);
+
 module.exports = { printlogo, logotomb };

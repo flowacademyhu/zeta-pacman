@@ -17,14 +17,12 @@ const print2dGameover = (arr1) => {
           break;
         case 0:
           ctx.bg(0, 0, 0);
-          // ctx.fg(255, 255, 255);
-          // ctx.text(j + 2, i + 2, ' ');
+          ctx.fg(0, 0, 0);
+          ctx.text(j + 2, i + 2, ' ');
       }
     }
     console.log();
   }
 };
-
-print2dGameover(arr1);
 
 module.exports = { arr1, print2dGameover };
