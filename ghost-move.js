@@ -7,7 +7,8 @@ let ghost01 = {
   y: 8,
   prev: 0,
   direct: 0,
-  start: ['', 'right', 'up']
+  start: ['', 'right', 'up'],
+  count: 0
 };
 
 let ghost02 = {
@@ -15,7 +16,8 @@ let ghost02 = {
   y: 8,
   prev: 0,
   direct: 0,
-  start: ['', '', '', '', '', '', '', 'right', 'up', 'up', 'up']
+  start: ['', '', '', '', '', '', '', 'right', 'up', 'up', 'up'],
+  count: 0
 };
 
 let ghost03 = {
@@ -23,7 +25,8 @@ let ghost03 = {
   y: 10,
   prev: 0,
   direct: 0,
-  start: ['', '', '', '', '', 'left', 'up']
+  start: ['', '', '', '', '', 'left', 'up'],
+  count: 0
 };
 
 let ghost04 = {
@@ -31,8 +34,12 @@ let ghost04 = {
   y: 10,
   prev: 0,
   direct: 0,
-  start: ['', '', '', '', '', '', '', '', '', '', '', 'left', 'up', 'up', 'up']
+  start: ['', '', '', '', '', '', '', '', '', '', '', 'left', 'up', 'up', 'up'],
+  count: 0
 };
+
+// let deltaX = [0, -1, 0, 1];
+// let deltaY = [-1, 0, 1, 0];
 
 const searchDirect = (arr, ghost, pacman) => {
   let ghostDirect = ['up', 'down', 'left', 'right']; // lehetséges irányok

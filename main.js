@@ -43,7 +43,6 @@ const game = (player) => {
   console.log(player.score);
   console.log(player.life);
   player.count++;
-  console.log(player.count);
 };
 
 mainGame();

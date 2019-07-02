@@ -1,4 +1,4 @@
- 
+
 dori        140 
 dori        120 
 dori        40 
@@ -9,4 +9,22 @@ dori        120
 laci        70 
 ricsi        120 
 ricsi2        80 
-ricsi3        180
+ricsi3        180 
+d        260 
+d        160 
+d        170 
+d        120 
+d        1340 
+d        2220 
+d        660 
+d        80
+ 
+d        120 
+d        120 
+d        120
+ 
+dori       1290 
+dori       540 
+d       710 
+d       100 
+d       0
