@@ -1,11 +1,8 @@
 
-const map = require('./pacmap');
-const { pacman, player, move, ghost01,
-  ghost02,
-  ghost03,
-  ghost04 } = require('./move');
-let arr = map.arr;
+const { arr, print2d } = require('./pacmap');
+const { pacman, player, move, ghost01, ghost02, ghost03, ghost04 } = require('./move');
 const { menu, logo } = require('./menu');
+const cherry = require('./show_the_cherry');
 
 let keypress = require('keypress');
 let readlineSync = require('readline-sync');
@@ -36,10 +33,9 @@ const mainGame = () => {
 
 const game = (player, arr) => {
   move(arr, player, pacman);
-  map.print2d(arr);
-  console.log(player.score);
-  console.log(player.life);
+  print2d(arr, player);
   player.count++;
+  cherry(player, arr);
   player.koszt = 0;
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr[i].length; j++) {
@@ -48,7 +44,6 @@ const game = (player, arr) => {
       }
     }
   }
-  console.log(player.koszt);
 };
 
 mainGame();

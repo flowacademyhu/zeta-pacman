@@ -90,7 +90,7 @@ const menu = (player, game, ghost01, ghost02, ghost03, ghost04, pacman) => {
           clearInterval(run);
           drawScore();
         } else {
-          if (player.koszt === 140) {
+          if (player.koszt === 0) {
             console.log('itt vagyok');
             again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
             arr = [

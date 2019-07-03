@@ -199,6 +199,9 @@ const move = (arr, player, pacman) => {
         if (arr[pacman.x + deltaX[p]][pacman.y + deltaY[p]] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
           player.score = player.score + 10;
         }
+        if (arr[pacman.x + deltaX[p]][pacman.y + deltaY[p]] === 4) {
+          player.score = player.score + 100;
+        }
         if (arr[pacman.x + deltaX[p]][pacman.y + deltaY[p]] === 7) {
           player.slow = 20;
         }
