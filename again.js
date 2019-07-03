@@ -1,6 +1,5 @@
 
 const again = (player, ghost01, ghost02, ghost03, ghost04, pacman, arr) => {
-  player.life = player.life - 1; // élet csökken eggyel
   player.count = 0;
   if (ghost01.prev !== 8) {
     arr[ghost01.x][ghost01.y] = ghost01.prev;

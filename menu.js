@@ -1,5 +1,7 @@
 const move = require('./move');
 let player = move.player;
+let { arr, print2d, arrOrigin } = require('./pacmap');
+const again = require('./again');
 let readlineSync = require('readline-sync');
 const fs = require('fs');
 const gameOver = require('./gameover');
@@ -76,17 +78,33 @@ const drawScore = () => {
   console.log(table.table(tombSort));
 };
 
-const addtofile = (player, game) => {
+const menu = (player, game, ghost01, ghost02, ghost03, ghost04, pacman) => {
   let menuPoints = ['new game', 'scoreboard'];
   let index = (readlineSync.keyInSelect(menuPoints)) + 1;
   console.clear();
   switch (index) {
     case 1:
       let run = setInterval(function () {
-        game(player);
-        if (player.life === 2) {
+        game(player, arr);
+        if (player.life === 0) {
           clearInterval(run);
           drawScore();
+        } else {
+          if (player.koszt === 140) {
+            console.log('itt vagyok');
+            again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
+            arr = [
+              [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], [5, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 5],
+              [5, 7, 5, 5, 3, 5, 5, 5, 3, 5, 3, 5, 5, 5, 3, 5, 5, 7, 5], [5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5],
+              [5, 3, 5, 5, 3, 5, 3, 5, 5, 5, 5, 5, 3, 5, 3, 5, 5, 3, 5], [5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5],
+              [5, 5, 5, 5, 3, 5, 3, 5, 5, 3, 5, 5, 3, 5, 3, 5, 5, 5, 5], [5, 5, 5, 5, 3, 5, 3, 5, 8, 0, 8, 5, 3, 5, 3, 5, 5, 5, 5],
+              [3, 3, 3, 3, 3, 3, 3, 5, 0, 0, 0, 5, 3, 3, 3, 3, 3, 3, 3], [5, 5, 5, 5, 3, 5, 3, 5, 8, 0, 8, 5, 3, 5, 3, 5, 5, 5, 5],
+              [5, 5, 5, 5, 3, 5, 3, 5, 5, 5, 5, 5, 3, 5, 3, 5, 5, 5, 5],
+              [5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5], [5, 3, 5, 5, 3, 5, 3, 5, 5, 5, 5, 5, 3, 5, 3, 5, 5, 3, 5],
+              [5, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5], [5, 7, 5, 5, 3, 5, 5, 5, 3, 5, 3, 5, 5, 5, 3, 5, 5, 7, 5],
+              [5, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 5], [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]];
+            print2d(arr);
+          }
         }
       }, 1000);
 
@@ -99,11 +117,11 @@ const addtofile = (player, game) => {
       if (back === 'q') {
         console.clear();
         logo();
-        addtofile(player, game);
+        menu(player, game);
       }
       break;
     case 0:process.exit();
   }
 };
 
-module.exports = { addtofile, logo, printlogo, pointIn };
+module.exports = { menu, logo, printlogo, pointIn };

@@ -1,18 +1,20 @@
 
 const map = require('./pacmap');
-const move = require('./move');
-let player = move.player;
-let pacman = move.pacman;
+const { pacman, player, move, ghost01,
+  ghost02,
+  ghost03,
+  ghost04 } = require('./move');
 let arr = map.arr;
-const menu = require('./menu');
+const { menu, logo } = require('./menu');
+
 let keypress = require('keypress');
 let readlineSync = require('readline-sync');
 
 const mainGame = () => {
   console.clear();
-  menu.logo();
+  logo();
   player.name = readlineSync.question('\n\n May I have your name pls? \n\n');
-  menu.addtofile(player, game);
+  menu(player, game, ghost01, ghost02, ghost03, ghost04, pacman);
 
   process.stdin.setRawMode(true);
   process.stdin.resume();
@@ -20,7 +22,6 @@ const mainGame = () => {
   keypress(process.stdin);
 
   process.stdin.on('keypress', function (ch, key) {
-    // if (['left', 'up', 'right', 'down', 'c'].includes(key.name)) {
     if (key && key.ctrl && key.name === 'c') {
       process.exit();
     }
@@ -30,19 +31,24 @@ const mainGame = () => {
     } else {
       pacman.direct = key.name;
     }
-  /* }else {
-      console.log('itt van?');
-      process.stdout.write(key.name);
-    } */
   });
 };
 
-const game = (player) => {
-  move.move(arr, player, pacman);
+const game = (player, arr) => {
+  move(arr, player, pacman);
   map.print2d(arr);
   console.log(player.score);
   console.log(player.life);
   player.count++;
+  player.koszt = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (arr[i][j] === 3) {
+        player.koszt += 1;
+      }
+    }
+  }
+  console.log(player.koszt);
 };
 
 mainGame();
