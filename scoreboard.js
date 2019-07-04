@@ -8,14 +8,6 @@ const pointIn = (player) => {
   });
 };
 
-function sortFunction (a, b) {
-  if (a[1] === b[1]) {
-    return 0;
-  } else {
-    return (a[1] > b[1]) ? -1 : 1;
-  }
-}
-
 const clear = () => {
   ctx.bg(0, 0, 0);
   ctx.clear();
@@ -31,36 +23,32 @@ const drawScore = () => {
       i--;
     }
   }
+  let tomb = [['Name', 'Score']];
 
-  let tomb = [];
   for (let i = 0; i < dataSplit.length; i++) {
     if (i % 2 === 0) {
       tomb.push([dataSplit[i], Number(dataSplit[i + 1])]);
     }
   }
 
-  let tombSort = tomb.sort(sortFunction);
-
+  let tombSort = selectSort(tomb);
   console.log(table.table(elsotiz(tombSort)));
 };
 
 const selectSort = (arr) => {
   let min = 0; // legkisebb elem indexe
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 1; i < arr.length; i++) {
     min = i;
     for (let j = i; j < arr.length; j++) { // Min keresés
-      if (arr[j] > arr[min]) {
+      if (arr[j][1] > arr[min][1]) {
         min = j; // Ha kisebb elemet találtunk, elmentjük az indexét
       }
     }
-    let temp = arr[i]; // Megcseréljük a 2 tömbelemet
-    arr[i] = arr[min];
-    arr[min] = temp;
+    let temp = arr[i][1]; // Megcseréljük a 2 tömbelemet
+    arr[i][1] = arr[min][1];
+    arr[min][1] = temp;
   } return arr;
 };
-
-// let tomb = [1, 4, 5, 7, 78, 98, 43, 2, 55, 78, 99, 91, 456];
-// let rendezett = (selectSort(tomb));
 
 const elsotiz = (arr) => {
   let kiirando = [];
@@ -70,5 +58,5 @@ const elsotiz = (arr) => {
     }
   } return kiirando;
 };
-// elsotiz(rendezett);
+
 module.exports = { selectSort, elsotiz, pointIn, clear, drawScore };

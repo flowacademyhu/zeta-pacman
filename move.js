@@ -24,135 +24,13 @@ let player = {
   life: 3,
   count: 0,
   name: '',
-  slow: 0
+  slow: 0,
+  beforeCherry: 0,
+  koszt: 0
 };
 
 const move = (arr, player, pacman) => {
   // pacman mozgása
-  /* switch (pacman.direct) {
-    case 'up':
-      if (arr[pacman.x - 1][pacman.y] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-        player.score = player.score + 10;
-      }
-      if (arr[pacman.x - 1][pacman.y] === 7) {
-        player.slow = 20;
-      }
-      if (arr[pacman.x - 1][pacman.y] === 5) { // ha ott ahová megy fal van, akkor ne mozduljon sehová
-
-      } else {
-        if (arr[pacman.x - 1][pacman.y] === 8) { // ha ott ahová megy szellem van, akkor elölről kezdődik
-          if (player.slow > 0) {
-            eat(player, ghost03, arr);
-          } else {
-            again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
-          }
-        } else {
-          arr[pacman.x][pacman.y] = 0;// ahol pacman eddig állt, az üres lesz
-          arr[pacman.x - 1][pacman.y] = 1; // ahová pacman megy, ott pacman lesz
-          pacman.x = pacman.x - 1;// pacman koordinátája
-        }
-      }
-      break;
-    case 'down':
-      if (arr[pacman.x + 1][pacman.y] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-        player.score = player.score + 10;
-      }
-      if (arr[pacman.x + 1][pacman.y] === 7) {
-        player.slow = 20;
-      }
-      if (arr[pacman.x + 1][pacman.y] === 5) {
-
-      } else {
-        if (arr[pacman.x + 1][pacman.y] === 8) {
-          if (player.slow > 0) {
-            eat(player, ghost03, arr);
-          } else {
-            again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
-          }
-        } else {
-          arr[pacman.x][pacman.y] = 0; // ahol pacman eddig állt, az üres lesz
-          arr[pacman.x + 1][pacman.y] = 1; // ahová pacman megy, ott pacman lesz
-          pacman.x = pacman.x + 1; // pacman koordinátája
-        }
-      }
-      break;
-    case 'left':
-      // ha kimegy a pálya szélén
-      if (pacman.x === 8 && pacman.y === 0) {
-        if (arr[pacman.x][18] === 8) {
-          again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
-        } else {
-          if (arr[pacman.x][18] === 3) {
-            player.score = player.score + 10;
-          }
-          arr[pacman.x][pacman.y] = 0; // ahol pacman eddig állt, az üres lesz
-          arr[pacman.x][18] = 1; // ahová pacman megy, ott pacman lesz
-          pacman.y = 18; // pacman koordinátája
-        }
-        // ha pályán belül mozog
-      } else {
-        if (arr[pacman.x][pacman.y - 1] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-          player.score = player.score + 10;
-        }
-        if (arr[pacman.x][pacman.y - 1] === 7) {
-          player.slow = 20;
-        }
-        if (arr[pacman.x][pacman.y - 1] === 5) {
-
-        } else {
-          if (arr[pacman.x][pacman.y - 1] === 8) {
-            if (player.slow > 0) {
-              eat(player, ghost03, arr);
-            } else {
-              again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
-            }
-          } else {
-            arr[pacman.x][pacman.y] = 0; // ahol pacman eddig állt, az üres lesz
-            arr[pacman.x][pacman.y - 1] = 1; // ahová pacman megy, ott pacman lesz
-            pacman.y = pacman.y - 1; // pacman koordinátája
-          }
-        }
-      }
-      break;
-    case 'right':
-      // ha kimegy a pálya szélén
-      if (pacman.x === 8 && pacman.y === 18) {
-        if (arr[pacman.x][0] === 8) {
-          again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
-        } else {
-          if (arr[pacman.x][0] === 3) {
-            player.score = player.score + 10;
-          }
-          arr[pacman.x][pacman.y] = 0; // ahol pacman eddig állt, az üres lesz
-          arr[pacman.x][0] = 1; // ahová pacman megy, ott pacman lesz
-          pacman.y = 0; // pacman koordinátája
-        }
-        // ha pályán belül mozog
-      } else {
-        if (arr[pacman.x][pacman.y + 1] === 3) { // ha ott ahová megy van kaja, akkor kapunk 10 pontot
-          player.score = player.score + 10;
-        }
-        if (arr[pacman.x][pacman.y + 1] === 7) {
-          player.slow = 20;
-        }
-        if (arr[pacman.x][pacman.y + 1] === 5) {
-
-        } else {
-          if (arr[pacman.x][pacman.y + 1] === 8) {
-            if (player.slow > 0) {
-              eat(player, ghost03, arr);
-            } else {
-              again(player, ghost01, ghost02, ghost03, ghost04, pacman, arr);
-            }
-          } else {
-            arr[pacman.x][pacman.y] = 0; // ahol pacman eddig állt, az üres lesz
-            arr[pacman.x][pacman.y + 1] = 1; // ahová pacman megy, ott pacman lesz
-            pacman.y = pacman.y + 1; // pacman koordinátája
-          }
-        }
-      }
-      break;
-  } */
 
   let p;
   for (let i = 0; i < direction.length; i++) {

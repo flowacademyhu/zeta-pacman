@@ -61,8 +61,8 @@ const print2d = (arr, player) => {
   }
   ctx.bg(0, 0, 0);
   ctx.fg(255, 255, 0);
-  console.log('Score:', player.score);
-  console.log('Life:', player.life);
+  console.log('                                Score:', player.score);
+  console.log('                                Life :', player.life);
 };
 
 module.exports = { arr, print2d };
