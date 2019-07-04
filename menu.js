@@ -1,12 +1,9 @@
-const move = require('./move');
-let player = move.player;
-let { arr, print2d, arrOrigin } = require('./pacmap');
+
+let { arr, print2d } = require('./pacmap');
 const again = require('./again');
 let readlineSync = require('readline-sync');
-const fs = require('fs');
-const gameOver = require('./gameover');
-let ctx = require('axel');
-const table = require('table');
+const { arr1, print2dGameover } = require('./gameover');
+const { pointIn, clear, drawScore } = require('./scoreboard');
 
 const logo = () => {
   let logotomb = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -36,48 +33,6 @@ const printlogo = (arr) => {
   }
 };
 
-const pointIn = (player) => {
-  // player.name = readlineSync.question('\n\n May I have your name pls? \n\n');
-  fs.appendFileSync('pontok.txt', ' \n' + player.name + '       ' + player.score, function (err) {
-    if (err) throw err;
-  });
-};
-
-function sortFunction (a, b) {
-  if (a[1] === b[1]) {
-    return 0;
-  } else {
-    return (a[1] > b[1]) ? -1 : 1;
-  }
-}
-
-const drawScore = () => {
-  ctx.bg(0, 0, 0);
-  ctx.clear();
-  gameOver.print2dGameover(gameOver.arr1);
-  pointIn(player);
-  let data = fs.readFileSync('pontok.txt');
-  let dataString = data.toString();
-  let dataSplit = dataString.split(/[\s]/);
-  for (let i = 0; i < dataSplit.length; i++) {
-    if (dataSplit[i] === '') {
-      dataSplit.splice(i, 1);
-      i--;
-    }
-  }
-
-  let tomb = [];
-  for (let i = 0; i < dataSplit.length; i++) {
-    if (i % 2 === 0) {
-      tomb.push([dataSplit[i], Number(dataSplit[i + 1])]);
-    }
-  }
-
-  let tombSort = tomb.sort(sortFunction);
-
-  console.log(table.table(tombSort));
-};
-
 const menu = (player, game, ghost01, ghost02, ghost03, ghost04, pacman) => {
   let menuPoints = ['new game', 'scoreboard'];
   let index = (readlineSync.keyInSelect(menuPoints)) + 1;
@@ -86,9 +41,17 @@ const menu = (player, game, ghost01, ghost02, ghost03, ghost04, pacman) => {
     case 1:
       let run = setInterval(function () {
         game(player, arr);
-        if (player.life === 0) {
+        if (player.life === 2) {
           clearInterval(run);
+          clear();
+          print2dGameover(arr1);
+          pointIn(player);
           drawScore();
+          console.log('press \'q\' to quit');
+          let quit = readlineSync.keyIn();
+          if (quit === 'q') {
+            process.exit();
+          }
         } else {
           if (player.koszt === 0) {
             console.log('itt vagyok');
@@ -110,8 +73,8 @@ const menu = (player, game, ghost01, ghost02, ghost03, ghost04, pacman) => {
 
       break;
     case 2:
-      let data = fs.readFileSync('pontok.txt');
-      console.log(data.toString());
+      clear();
+      drawScore();
       console.log('press \'q\' to menu');
       let back = readlineSync.keyIn();
       if (back === 'q') {
@@ -124,4 +87,4 @@ const menu = (player, game, ghost01, ghost02, ghost03, ghost04, pacman) => {
   }
 };
 
-module.exports = { menu, logo, printlogo, pointIn };
+module.exports = { menu, logo, printlogo };

@@ -13,16 +13,13 @@ let arr = [
 const print2d = (arr, player) => {
   let x = 1;
   let y = 1;
-  // ctx.clear();
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr[i].length; j++) {
       switch (arr[i][j]) {
         case 5:
-          /* for (let x = 0; x < arr.length; x++) {
-            for (let y = 0; y < arr[i].length; j++) { */
           ctx.bg(0, 128, 255);
           ctx.fg(0, 128, 255);
-          ctx.box(x, y, 2, 2);
+          ctx.box(x, y, 4, 2);
           break;
         case 3:
           ctx.bg(0, 0, 0);
@@ -55,9 +52,8 @@ const print2d = (arr, player) => {
           ctx.text(x, y, '█');
           break;
         default:
-          // process.stdout.write(arr[i + 1][j + 1] + '   ');
       }
-      x += 2;
+      x += 4;
     }
     y += 2;
     x = 1;
