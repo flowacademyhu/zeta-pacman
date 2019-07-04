@@ -1,8 +1,6 @@
 const eat = (player, ghost, arr) => {
   player.score = player.score + 200;
-  if (ghost.prev === 8) {
-
-  } else {
+  if (ghost.prev !== 8) {
     arr[ghost.x][ghost.y] = ghost.prev;
   }
   ghost.x = 8;

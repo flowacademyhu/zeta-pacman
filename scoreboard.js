@@ -44,9 +44,9 @@ const selectSort = (arr) => {
         min = j; // Ha kisebb elemet találtunk, elmentjük az indexét
       }
     }
-    let temp = arr[i][1]; // Megcseréljük a 2 tömbelemet
-    arr[i][1] = arr[min][1];
-    arr[min][1] = temp;
+    let temp = arr[i]; // Megcseréljük a 2 tömbelemet
+    arr[i] = arr[min];
+    arr[min] = temp;
   } return arr;
 };
 

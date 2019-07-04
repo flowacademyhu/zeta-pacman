@@ -23,18 +23,24 @@ const print2d = (arr, player) => {
           break;
         case 3:
           ctx.bg(0, 0, 0);
-          ctx.fg(153, 153, 0);
+          ctx.fg(255, 255, 0);
           ctx.text(x, y, '▄');
           break;
         case 8:
-          ctx.bg(0, 0, 0);
-          ctx.fg(255, 0, 0);
-          ctx.text(x, y, '■');
+          if (player.slow > 0) {
+            ctx.bg(0, 0, 0);
+            ctx.fg(0, 76, 153);
+            ctx.text(x, y, '8');/* ■ */
+          } else {
+            ctx.bg(0, 0, 0);
+            ctx.fg(255, 0, 0);
+            ctx.text(x, y, '8');/* ■ */
+          }
           break;
         case 1:
           ctx.bg(0, 0, 0);
-          ctx.fg(255, 255, 0);
-          ctx.text(x, y, '█');
+          ctx.fg(0, 255, 0);
+          ctx.text(x, y, '@');/* █ */
           break;
         case 0:
           ctx.bg(0, 0, 0);
@@ -43,8 +49,8 @@ const print2d = (arr, player) => {
           break;
         case 7:
           ctx.bg(0, 0, 0);
-          ctx.fg(30, 0, 30);
-          ctx.text(x, y, '■');
+          ctx.fg(255, 0, 255);
+          ctx.text(x, y, '▄');
           break;
         case 4:
           ctx.bg(0, 0, 0);
