@@ -1,12 +1,1 @@
- 
-dori        140 
-dori        120 
-dori        40 
-doridoridoridoridori        80 
-dddoridoridoridoridoridorid        80 
-doridoridoridori        70 
-dori        120 
-laci        70 
-ricsi        120 
-ricsi2        80 
-ricsi3        180
+d;180;d;220;
