@@ -1,4 +1,3 @@
-const table = require('table');
 let ctx = require('axel');
 const fs = require('fs');
 
@@ -24,7 +23,6 @@ const drawScore = () => {
     }
   }
   let tomb = [['Name', 'Score']];
-
   for (let i = 0; i < dataSplit.length; i++) {
     if (i % 2 === 0) {
       tomb.push([dataSplit[i], Number(dataSplit[i + 1])]);
@@ -32,7 +30,7 @@ const drawScore = () => {
   }
 
   let tombSort = selectSort(tomb);
-  console.log(table.table(elsotiz(tombSort)));
+  return tombSort;
 };
 
 const selectSort = (arr) => {
@@ -53,7 +51,7 @@ const selectSort = (arr) => {
 const elsotiz = (arr) => {
   let kiirando = [];
   for (let i = 0; i < arr.length; i++) {
-    if (i <= 9) {
+    if (i <= 10) {
       kiirando.push(arr[i]);
     }
   } return kiirando;

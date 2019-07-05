@@ -42,7 +42,7 @@ let deltaX = [0, -1, 0, 1];
 let deltaY = [-1, 0, 1, 0];
 let direction = ['left', 'up', 'right', 'down'];
 
-const searchDirect = (arr, ghost, pacman) => {
+const searchDirect = (arr, ghost) => {
   let moveDirect = [];
 
   for (let i = 0; i < deltaX.length; i++) {
@@ -105,89 +105,6 @@ const searchDirect = (arr, ghost, pacman) => {
   }
   return randomDir;
 };
-
-/* const ghostMove = (arr, ghost) => {
-  switch (ghost.direct) {
-    case 'up':
-      if (ghost.prev === 8) { // Ha szellem szellemmel találkozik, akkor ne tárolja őt el a prev-be, ne rakjon vissza lenyomat szellemet
-
-      } else {
-        arr[ghost.x][ghost.y] = ghost.prev;// ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      }
-      if (arr[ghost.x - 1][ghost.y] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
-        return false;
-      } else {
-        ghost.prev = arr[ghost.x - 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-        arr[ghost.x - 1][ghost.y] = 8; // ahova megy, ott szellem lesz
-        ghost.x = ghost.x - 1;// szellem koordinátái
-        return true;
-      }
-    case 'down':
-      if (ghost.prev === 8 || ghost.prev === 1) {
-
-      } else {
-        arr[ghost.x][ghost.y] = ghost.prev;// ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      }
-      if (arr[ghost.x + 1][ghost.y] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
-        return false;
-      } else {
-        ghost.prev = arr[ghost.x + 1][ghost.y]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-        arr[ghost.x + 1][ghost.y] = 8; // ahova megy, ott szellem lesz
-        ghost.x = ghost.x + 1;// szellem koordinátái
-        return true;
-      }
-    case 'left':
-      if (ghost.prev === 8 || ghost.prev === 1) {
-
-      } else {
-        arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      }
-      if (ghost.x === 8 && ghost.y === 0) {
-        if (arr[ghost.x][18] === 1) {
-          return false;
-        } else {
-          ghost.prev = arr[ghost.x][18]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-          arr[ghost.x][18] = 8; // ahova megy, ott szellem lesz
-          ghost.y = 18;// szellem koordinátái
-          return true;
-        }
-      } else {
-        if (arr[ghost.x][ghost.y - 1] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
-          return false;
-        } else {
-          ghost.prev = arr[ghost.x][ghost.y - 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-          arr[ghost.x][ghost.y - 1] = 8; // ahova megy, ott szellem lesz
-          ghost.y = ghost.y - 1;// szellem koordinátái
-          return true;
-        }
-      }
-    case 'right':
-      if (ghost.prev === 8 || ghost.prev === 1) {
-
-      } else {
-        arr[ghost.x][ghost.y] = ghost.prev; // ahonnan elmegy oda visszakerül az ami eredetileg ott volt
-      }
-      if (ghost.x === 8 && ghost.y === 18) {
-        if (arr[ghost.x][0] === 1) {
-          return false;
-        } else {
-          ghost.prev = arr[ghost.x][0]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-          arr[ghost.x][0] = 8; // ahova megy, ott szellem lesz
-          ghost.y = 0;// szellem koordinátái
-          return true;
-        }
-      } else {
-        if (arr[ghost.x][ghost.y + 1] === 1) { // Ha ott ahova lépne pacman van, adjon vissza false-ot, egyébként true-t
-          return false;
-        } else {
-          ghost.prev = arr[ghost.x][ghost.y + 1]; // prev-be elmentjük, hogy mi van ott, ahova menni fog
-          arr[ghost.x][ghost.y + 1] = 8; // ahova megy, ott szellem lesz
-          ghost.y = ghost.y + 1;// szellem koordinátái
-          return true;
-        }
-      }
-  }
-}; */
 
 const ghostMove = (arr, ghost) => {
   let d;
