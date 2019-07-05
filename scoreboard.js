@@ -23,7 +23,7 @@ const drawScore = () => {
     }
   }
   let tomb = [['Name', 'Score']];
-  for (let i = 0; i < dataSplit.length; i++) {
+  for (let i = 0; i < dataSplit.length - 1; i++) {
     if (i % 2 === 0) {
       tomb.push([dataSplit[i], Number(dataSplit[i + 1])]);
     }
