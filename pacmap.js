@@ -29,12 +29,12 @@ const print2d = (arr, player) => {
         case 8:
           if (player.slow > 0) {
             ctx.bg(0, 0, 0);
-            ctx.fg(0, 76, 153);
-            ctx.text(x, y, '8');/* ■ */
+            ctx.fg(255, 255, 255);
+            ctx.text(x, y, '#');/* ■ */
           } else {
             ctx.bg(0, 0, 0);
-            ctx.fg(255, 0, 0);
-            ctx.text(x, y, '8');/* ■ */
+            ctx.fg(255, 102, 102);
+            ctx.text(x, y, '#');/* ■ */
           }
           break;
         case 1:

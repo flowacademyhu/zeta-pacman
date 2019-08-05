@@ -138,7 +138,7 @@ const run = () => {
 };
 
 const menu = () => {
-  let menuPoints = ['new game', 'scoreboard'];
+  let menuPoints = ['NEW GAME', 'SCOREBOARD'];
   let index = (readlineSync.keyInSelect(menuPoints)) + 1;
   console.clear();
   switch (index) {
